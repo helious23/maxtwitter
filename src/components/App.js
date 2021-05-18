@@ -7,7 +7,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
-      // Auth 상태를 listen
+      // Auth 상태를 listen -> log in 여부 판단
       if (user) {
         setIsLoggedIn(true);
       } else {
