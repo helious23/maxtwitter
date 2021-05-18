@@ -1,4 +1,4 @@
-import { dbService } from "fbase";
+import { dbService, storageService } from "fbase";
 import React, { useState } from "react";
 
 const MaxTweet = ({ maxtweetObj, isOwner }) => {
@@ -8,6 +8,9 @@ const MaxTweet = ({ maxtweetObj, isOwner }) => {
     const ok = window.confirm("Are you sure you want to delete this one?");
     if (ok) {
       await dbService.doc(`maxtweets/${maxtweetObj.id}`).delete();
+      if (maxtweetObj.attachmentUrl !== "") {
+        await storageService.refFromURL(maxtweetObj.attachmentUrl).delete();
+      }
     }
   };
   const toggleEditing = () => setEditing((prev) => !prev);
