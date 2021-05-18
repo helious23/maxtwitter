@@ -21,15 +21,26 @@ const Home = ({ userObj }) => {
   }, []);
   const onSubmit = async (event) => {
     event.preventDefault();
-    const fileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
-    const response = await fileRef.putString(attachment, "data_url");
-    console.log(response);
-    // await dbService.collection("maxtweets").add({
-    //   text: maxtweet,
-    //   createdAt: Date.now(),
-    //   creatorId: userObj.uid,
-    // });
-    // setMaxtweet("");
+    let attachmentUrl = "";
+
+    if (attachment !== "") {
+      const attachmentRef = storageService
+        .ref()
+        .child(`${userObj.uid}/${uuidv4()}`); // random 이름 설정
+      const response = await attachmentRef.putString(attachment, "data_url");
+      attachmentUrl = await response.ref.getDownloadURL(); // bucket 의 url
+    }
+
+    const maxtweetObj = {
+      text: maxtweet,
+      createdAt: Date.now(),
+      creatorId: userObj.uid,
+      attachmentUrl,
+    };
+
+    await dbService.collection("maxtweets").add(maxtweetObj);
+    setMaxtweet("");
+    setAttachment("");
   };
   const onChange = (event) => {
     const {

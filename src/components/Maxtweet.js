@@ -47,6 +47,14 @@ const MaxTweet = ({ maxtweetObj, isOwner }) => {
       ) : (
         <>
           <h4>{maxtweetObj.text}</h4>
+          {maxtweetObj.attachmentUrl && (
+            <img
+              alt={maxtweetObj.text}
+              src={maxtweetObj.attachmentUrl}
+              width="50px"
+              height="50px"
+            />
+          )}
           {isOwner && (
             <>
               <button onClick={onDeleteClick}>Delete</button>
