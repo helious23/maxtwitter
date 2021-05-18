@@ -36,7 +36,7 @@ const MaxTweet = ({ maxtweetObj, isOwner }) => {
               value={newMaxtweet}
               required
             />
-            <input type="submit" value="Update Maxtweet" />
+            <input type="submit" value="Update" />
           </form>
           <button onClick={toggleEditing}>Cancel</button>
         </>
