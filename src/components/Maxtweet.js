@@ -28,17 +28,21 @@ const MaxTweet = ({ maxtweetObj, isOwner }) => {
     <div>
       {editing ? (
         <>
-          <form onSubmit={onSubmit}>
-            <input
-              onChange={onChange}
-              type="text"
-              placeholder="Edit your Maxtweet"
-              value={newMaxtweet}
-              required
-            />
-            <input type="submit" value="Update" />
-          </form>
-          <button onClick={toggleEditing}>Cancel</button>
+          {isOwner && (
+            <>
+              <form onSubmit={onSubmit}>
+                <input
+                  onChange={onChange}
+                  type="text"
+                  placeholder="Edit your Maxtweet"
+                  value={newMaxtweet}
+                  required
+                />
+                <input type="submit" value="Update" />
+              </form>
+              <button onClick={toggleEditing}>Cancel</button>
+            </>
+          )}
         </>
       ) : (
         <>
