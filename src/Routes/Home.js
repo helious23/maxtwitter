@@ -1,10 +1,10 @@
+import MaxTweet from "components/Maxtweet";
 import { dbService } from "fbase";
 import React, { useEffect, useState } from "react";
 
 const Home = ({ userObj }) => {
   const [maxtweet, setMaxtweet] = useState("");
   const [maxtweets, setMaxtweets] = useState([]);
-
   useEffect(() => {
     dbService
       .collection("maxtweets")
@@ -46,9 +46,11 @@ const Home = ({ userObj }) => {
       </form>
       <div>
         {maxtweets.map((maxtweet) => (
-          <div key={maxtweet.id}>
-            <h4>{maxtweet.text}</h4>
-          </div>
+          <MaxTweet
+            key={maxtweet.id}
+            maxtweetObj={maxtweet}
+            isOwner={maxtweet.creatorId === userObj.uid} // creatorId 와 props 로 받은 userObj.id 비교
+          />
         ))}
       </div>
     </div>
