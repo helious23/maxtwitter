@@ -1,6 +1,7 @@
 import MaxTweet from "components/Maxtweet";
-import { dbService } from "fbase";
+import { dbService, storageService } from "fbase";
 import React, { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const Home = ({ userObj }) => {
   const [maxtweet, setMaxtweet] = useState("");
@@ -20,12 +21,15 @@ const Home = ({ userObj }) => {
   }, []);
   const onSubmit = async (event) => {
     event.preventDefault();
-    await dbService.collection("maxtweets").add({
-      text: maxtweet,
-      createdAt: Date.now(),
-      creatorId: userObj.uid,
-    });
-    setMaxtweet(""); // input 비워줌
+    const fileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
+    const response = await fileRef.putString(attachment, "data_url");
+    console.log(response);
+    // await dbService.collection("maxtweets").add({
+    //   text: maxtweet,
+    //   createdAt: Date.now(),
+    //   creatorId: userObj.uid,
+    // });
+    // setMaxtweet("");
   };
   const onChange = (event) => {
     const {
