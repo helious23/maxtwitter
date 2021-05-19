@@ -14,6 +14,8 @@ function App() {
           uid: user.uid,
           updateProfile: (args) => user.updateProfile(args),
         }); // user 정보를 userObj 에 담음
+      } else {
+        setUserObj(null);
       }
       setInit(true);
     });
