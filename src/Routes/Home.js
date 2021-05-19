@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 const Home = ({ userObj }) => {
   const [maxtweet, setMaxtweet] = useState("");
   const [maxtweets, setMaxtweets] = useState([]);
-  const [attachment, setAttachment] = useState();
+  const [attachment, setAttachment] = useState("");
   useEffect(() => {
     dbService
       .collection("maxtweets")
