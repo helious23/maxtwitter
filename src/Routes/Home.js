@@ -20,9 +20,9 @@ const Home = ({ userObj }) => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <MaxtweetFactory userObj={userObj} />
-      <div>
+      <div style={{ marginTop: 30 }}>
         {maxtweets.map((maxtweet) => (
           <MaxTweet
             key={maxtweet.id}
