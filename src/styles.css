@@ -7,7 +7,6 @@
 input {
   all: unset;
   appearance: none;
-  box-sizing: border-box;
 }
 
 body {
